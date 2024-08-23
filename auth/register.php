@@ -4,7 +4,10 @@ require "../config/config.php";
 require "../config/helper.php";
 require "../includes/header.php";
 
-
+if (isset($_SESSION['username'])) {
+    header("location: ../index.php");
+    exit();
+}
 // Initialize message variable
 $message = '';
 

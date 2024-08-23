@@ -51,10 +51,10 @@ ob_start();
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  text-white" href="auth/login.php">Login</a>
+                    <a class="nav-link  text-white" href="./auth/login.php">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  text-white" href="auth/register.php">Register</a>
+                    <a class="nav-link  text-white" href="./auth/register.php">Register</a>
                 </li>
             </ul>
 

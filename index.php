@@ -1,6 +1,5 @@
 <?php
 require "./includes/header.php";
-require "./includes/header.php";
 ?>
 
         <div class="row mt-5">
