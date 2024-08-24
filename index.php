@@ -19,7 +19,7 @@ $products = read($conn, 'products');
                         <h5 class="d-inline">
                             <div class="text-muted d-inline">($<?= $product['price']; ?>/item)</div>
                         </h5>
-                        <p> <?= $product['description']; ?> </p>
+                        <p> <?= substr($product['description'],0,80); ?>... </p>
                         <a href="./shopping/single.php?id=<?= $product['id']; ?>" class="btn btn-primary w-100 rounded my-2"> More<i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
