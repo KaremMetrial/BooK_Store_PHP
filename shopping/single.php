@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
 }
 ?>
-<div class="row d-flex justify-content-center">
+<div class="row d-flex justify-content-center my-5">
     <div class="col-md-10">
         <div class="card">
             <div class="row">
@@ -66,30 +66,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             <input type="hidden" name="csrf_token"
                                    value="<?php echo htmlspecialchars($csrf_token); ?>">
                             <div class="">
-                                <input type="text" name="product_id" class="form-control" id=""
+                                <input type="hidden" name="product_id" class="form-control" id=""
                                        value="<?= $product[0]['id']; ?>">
                             </div>
                             <div class="">
-                                <input type="text" name="product_name" class="form-control" id=""
+                                <input type="hidden" name="product_name" class="form-control" id=""
                                        value="<?= $product[0]['name']; ?>">
                             </div>
                             <div class="">
-                                <input type="text" name="product_image" class="form-control" id=""
+                                <input type="hidden" name="product_image" class="form-control" id=""
                                        value="<?= $product[0]['image']; ?>">
                             </div>
                             <div class="">
-                                <input type="text" name="product_price" class="form-control" id=""
+                                <input type="hidden" name="product_price" class="form-control" id=""
                                        value="<?= $product[0]['price']; ?>">
                             </div>
                             <div class="">
-                                <input type="text" name="product_amount" class="form-control" id="" value="1">
+                                <input type="hidden" name="product_amount" class="form-control" id="" value="1">
                             </div>
                             <div class="">
-                                <input type="text" name="product_file" class="form-control" id=""
+                                <input type="hidden" name="product_file" class="form-control" id=""
                                        value="<?= $product[0]['file']; ?>">
                             </div>
                             <div class="">
-                                <input type="text" name="user_id" class="form-control" id=""
+                                <input type="hidden" name="user_id" class="form-control" id=""
                                        value="<?= $_SESSION['user_id']; ?>">
                             </div>
                             <div class="cart mt-4 align-items-center">
