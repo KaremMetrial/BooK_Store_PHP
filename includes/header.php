@@ -1,7 +1,14 @@
 <?php
 ob_start();
 session_start();
-
+define("APPURL","http://localhost/bookstore");
+//dirname(dirname(__FILE__))."/config/config.php";
+//dirname(dirname(__FILE__))."/config/helper.php";
+$number_of_items = 0;
+if(isset($_SESSION['user_id'])) {
+    $cart_items = read($conn, 'cart', ['user_id' => $_SESSION['user_id']]);
+    $number_of_items = count($cart_items);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,7 +27,7 @@ session_start();
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <div class="container" style="margin-top: none">
-        <a class="navbar-brand  text-white" href="#">Bookstore</a>
+        <a class="navbar-brand  text-white" href="<?= APPURL; ?>">Bookstore</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,18 +39,18 @@ session_start();
             </form> -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active  text-white" aria-current="page" href="#/index.php">Home</a>
+                    <a class="nav-link active  text-white" aria-current="page" href="<?= APPURL; ?>/index.php">Home</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link  text-white" href="http://localhost/bookstore/contact.php">Contact</a>
+                    <a class="nav-link  text-white" href="<?= APPURL; ?>/contact.php">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active  text-white" aria-current="page"
-                       href="http://localhost/bookstore/shopping/cart.php"><i class="fas fa-shopping-cart"></i>(2)</a>
+                       href="<?= APPURL; ?>/shopping/cart.php"><i class="fas fa-shopping-cart"></i>(<?= $number_of_items; ?>)</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active  text-white" aria-current="page"
-                       href="http://localhost/bookstore/categories/index.php">Categories</a>
+                       href="<?= APPURL; ?>/categories/index.php">Categories</a>
                 </li>
                 <?php
                 if (isset($_SESSION['username'])) :
@@ -59,17 +66,17 @@ session_start();
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="./auth/logout.php">Log Out</a></li>
+                            <li><a class="dropdown-item" href="<?= APPURL; ?>/auth/logout.php">Log Out</a></li>
                         </ul>
                     </li>
                 <?php
                 else:
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link  text-white" href="./auth/login.php">Login</a>
+                        <a class="nav-link  text-white" href="<?= APPURL; ?>/auth/login.php">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  text-white" href="./auth/register.php">Register</a>
+                        <a class="nav-link  text-white" href="<?= APPURL; ?>/auth/register.php">Register</a>
                     </li>
                 <?php
                 endif;

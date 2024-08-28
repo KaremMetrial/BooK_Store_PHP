@@ -67,6 +67,14 @@ $i = 1;
                             <div class="d-flex justify-content-between align-items-center mb-5">
                                 <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
                             </div>
+                            <?php if (!$products) : ?>
+                                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                    <div>
+                                        No items in cart
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
                             <table class="table" height="190">
                                 <thead>
                                 <tr>
@@ -76,26 +84,45 @@ $i = 1;
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Total Price</th>
-                                    <th scope="col"><button value="<?= $_SESSION['user_id']; ?>"  class="delete_all btn btn-danger text-white">Clear</button></th>
+                                    <th scope="col">
+                                        <button value="<?= $_SESSION['user_id']; ?>"
+                                                class="delete_all btn btn-danger text-white">Clear
+                                        </button>
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php foreach ($products as $product): ?>
                                     <tr class="mb-4">
                                         <th scope="row"><?= $i; ?></th>
-                                        <td><img width="100" height="100" src="../images/<?= $product['product_image']; ?>" class="img-fluid rounded-3" alt="<?= $product['product_name']; ?>"></td>
+                                        <td><img width="100" height="100"
+                                                 src="../images/<?= $product['product_image']; ?>"
+                                                 class="img-fluid rounded-3" alt="<?= $product['product_name']; ?>">
+                                        </td>
                                         <td><?= $product['product_name']; ?></td>
                                         <td class="pro_price">$<?= $product['product_price']; ?></td>
-                                        <td><input id="form1" min="1" name="quantity" value="<?= $product['product_amount']; ?>" type="number" class="form-control form-control-sm pro_amount" /></td>
-                                        <td class="total_price">$<?= $product['product_price'] * $product['product_amount']; ?></td>
-                                        <td><button value="<?= $product['product_id']; ?>" class="btn-update btn btn-warning text-white"><i class="fas fa-pen"></i> </button></td>
-                                        <td><button value="<?= $product['product_id']; ?>" class="btn-delete btn btn-danger text-white"><i class="fas fa-trash-alt"></i> </button></td>
+                                        <td><input id="form1" min="1" name="quantity"
+                                                   value="<?= $product['product_amount']; ?>" type="number"
+                                                   class="form-control form-control-sm pro_amount"/></td>
+                                        <td class="total_price">
+                                            $<?= $product['product_price'] * $product['product_amount']; ?></td>
+                                        <td>
+                                            <button value="<?= $product['product_id']; ?>"
+                                                    class="btn-update btn btn-warning text-white"><i
+                                                        class="fas fa-pen"></i></button>
+                                        </td>
+                                        <td>
+                                            <button value="<?= $product['product_id']; ?>"
+                                                    class="btn-delete btn btn-danger text-white"><i
+                                                        class="fas fa-trash-alt"></i></button>
+                                        </td>
                                     </tr>
                                     <?php $i++; ?>
                                 <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <a href="../index.php" class="btn btn-success text-white"><i class="fas fa-arrow-left"></i>  Continue Shopping</a>
+                            <a href="../index.php" class="btn btn-success text-white"><i class="fas fa-arrow-left"></i>
+                                Continue Shopping</a>
                         </div>
                     </div>
                     <div class="col-lg-4 bg-grey">
@@ -104,9 +131,13 @@ $i = 1;
                             <hr class="my-4">
                             <div class="d-flex justify-content-between mb-5">
                                 <h5 class="text-uppercase">Total price</h5>
-                                <h5 class="summary_total_price">$<?= array_sum(array_map(function($product) { return $product['product_price'] * $product['product_amount']; }, $products)); ?></h5>
+                                <h5 class="summary_total_price">$<?= array_sum(array_map(function ($product) {
+                                        return $product['product_price'] * $product['product_amount'];
+                                    }, $products)); ?></h5>
                             </div>
-                            <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Checkout</button>
+                            <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">
+                                Checkout
+                            </button>
                         </div>
                     </div>
                 </div>

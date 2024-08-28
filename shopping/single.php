@@ -127,12 +127,14 @@ require "../includes/footer.php";
                 success: function (response) {
                     alert("Added to cart successfully!");
                     $("#submit").html("<i class='fas fa-shopping-cart'></i> Added to cart").prop("disabled", true);
+                    window.location.reload();
                 },
                 error: function () {
                     alert("Failed to add to cart. Please try again.");
                 }
             });
         });
+
     });
 </script>
 
