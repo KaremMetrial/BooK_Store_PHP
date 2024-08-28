@@ -71,21 +71,35 @@ function update($conn, $table, $data, $where)
         }
         $setClauseString = implode(', ', $setClause);
 
+        // Build the WHERE clause
+        $whereClause = [];
+        foreach ($where as $key => $value) {
+            $whereClause[] = "$key = :where_$key";
+        }
+        $whereClauseString = implode(' AND ', $whereClause);
+
         // Prepare the SQL statement
-        $query = "UPDATE $table SET $setClauseString WHERE $where";
+        $query = "UPDATE $table SET $setClauseString WHERE $whereClauseString";
         $stmt = $conn->prepare($query);
 
-        // Bind parameters
+        // Bind parameters for SET clause
         foreach ($data as $key => $value) {
             $stmt->bindValue(":$key", $value);
         }
 
+        // Bind parameters for WHERE clause
+        foreach ($where as $key => $value) {
+            $stmt->bindValue(":where_$key", $value);
+        }
+
         // Execute the statement
-        $stmt->execute();
+        return $stmt->execute();
     } catch (PDOException $e) {
         error_log("Update Error: " . $e->getMessage()); // Log error instead of echo
+        return false; // Return false if the update fails
     }
 }
+
 
 function delete($conn, $table, $where)
 {
