@@ -3,6 +3,15 @@ require "../config/config.php";
 require "../config/helper.php";
 require "../includes/header.php";
 
+
+if (!isset($_SESSION['user_id'])) {
+    header('location:../auth/login.php');
+    exit();
+}
+
+$products = read($conn, 'cart', ['user_id' => $_SESSION['user_id']]);
+$i = 1;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update'])) {
         $product_id = $_POST['id'];
@@ -46,15 +55,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         exit();
     }
+    if (isset($_POST['submit'])) {
+        $totalPrice = array_sum(array_map(function ($product) {
+            return $product['product_price'] * $product['product_amount'];
+        }, $products));
+        $_SESSION['summary_total_price'] = $totalPrice;
+        header('Location: checkout.php');
+        exit();
+    }
 }
 
-if (!isset($_SESSION['user_id'])) {
-    header('location:../auth/login.php');
-    exit();
-}
-
-$products = read($conn, 'cart', ['user_id' => $_SESSION['user_id']]);
-$i = 1;
 ?>
 
 <div class="row d-flex justify-content-center align-items-center h-100 mt-5">
@@ -129,15 +139,19 @@ $i = 1;
                         <div class="p-5">
                             <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                             <hr class="my-4">
-                            <div class="d-flex justify-content-between mb-5">
-                                <h5 class="text-uppercase">Total price</h5>
-                                <h5 class="summary_total_price">$<?= array_sum(array_map(function ($product) {
-                                        return $product['product_price'] * $product['product_amount'];
-                                    }, $products)); ?></h5>
-                            </div>
-                            <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">
-                                Checkout
-                            </button>
+                            <form action="" method="post">
+                                <div class="d-flex justify-content-between mb-5">
+                                    <h5 class="text-uppercase">Total price</h5>
+                                    <h5 class="summary_total_price">$<?= array_sum(array_map(function ($product) {
+                                            return $product['product_price'] * $product['product_amount'];
+                                        }, $products)); ?></h5>
+                                </div>
+                                <button type="submit" name="submit" class="btn btn-dark btn-block btn-lg"
+                                        data-mdb-ripple-color="dark">
+                                    Checkout
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
