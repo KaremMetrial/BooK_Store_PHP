@@ -146,10 +146,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             return $product['product_price'] * $product['product_amount'];
                                         }, $products)); ?></h5>
                                 </div>
-                                <button type="submit" name="submit" class="btn btn-dark btn-block btn-lg"
-                                        data-mdb-ripple-color="dark">
-                                    Checkout
-                                </button>
+                                <?php if ($products) : ?>
+                                    <button type="submit" name="submit" class="btn btn-dark btn-block btn-lg"
+                                            data-mdb-ripple-color="dark">
+                                        Checkout
+                                    </button>
+                                <?php endif; ?>
                             </form>
 
                         </div>

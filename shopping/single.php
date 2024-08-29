@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
         echo "<center><h2>Product not found</h2></center>";
         exit();
     }
+} else{
+    header('Location:' . APPURL . '/404.php');
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $pro_id = htmlspecialchars($_POST['product_id']);

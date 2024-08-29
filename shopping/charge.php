@@ -3,6 +3,15 @@ require "../config/config.php";
 require "../config/helper.php";
 require "../includes/header.php";
 require_once "../vendor/autoload.php";
+/* at the top of 'check.php' */
+if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
+    /*
+       Up to you which header to send, some prefer 404 even if
+       the files does exist for security
+    */
+    header( 'HTTP/1.0 403 Forbidden', TRUE, 403 );
+    die(header( 'location:' . APPURL . ''));
+}
 if (isset($_POST['email'])) {
     // Initialize the StripeClient with the secret key
     $stripe = new \Stripe\StripeClient($secret_key);
@@ -26,7 +35,7 @@ if (isset($_POST['email'])) {
         $token = $_POST['stripeToken'];
         $user_id = $_SESSION['user_id'];
         $insertData = insert($conn, 'orders', ['email' => $email, 'username' => $username, 'fname' => $fname, 'lname' => $lname, "token" => $token, 'price' => $price, 'user_id' => $user_id]);
-
+        header("location:" . APPURL . "/download.php");
     }
 }
 

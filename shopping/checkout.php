@@ -3,6 +3,16 @@ require "../config/config.php";
 require "../config/helper.php";
 require "../includes/header.php";
 //echo $_SESSION['summary_total_price'];
+
+/* at the top of 'check.php' */
+if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
+    /*
+       Up to you which header to send, some prefer 404 even if
+       the files does exist for security
+    */
+    header( 'HTTP/1.0 403 Forbidden', TRUE, 403 );
+    die(header( 'location:' . APPURL . ''));
+}
 ?>
 
       <h2 class="my-5 h2 text-center">Checkout</h2>
