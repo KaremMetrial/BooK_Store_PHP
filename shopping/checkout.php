@@ -70,7 +70,7 @@ if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERV
 
               <!--email-->
               <div class="md-form mb-5">
-                <label for="email" class="">Email (optional)</label>
+                <label for="email" class="">Email </label>
 
                 <input type="text" name="email" id="email" class="form-control" placeholder="youremail@example.com">
               </div>
