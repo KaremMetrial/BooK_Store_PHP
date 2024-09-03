@@ -41,14 +41,14 @@ define("ADMIN_URL", "http://localhost/bookstore/admin-panel");
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= ADMIN_URL; ?>admins/admins.php" style="margin-left: 20px;">Admins</a>
+                            <a class="nav-link" href="<?= ADMIN_URL; ?>/admins/admins.php" style="margin-left: 20px;">Admins</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= ADMIN_URL; ?>/categories-admins/show-categories.html"
+                            <a class="nav-link" href="<?= ADMIN_URL; ?>/categories-admins/show-categories.php"
                                style="margin-left: 20px;">Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= ADMIN_URL; ?>/products-admins/show-products.html"
+                            <a class="nav-link" href="<?= ADMIN_URL; ?>/products-admins/show-products.php"
                                style="margin-left: 20px;">Products</a>
                         </li>
 
