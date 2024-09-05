@@ -1,11 +1,12 @@
 <?php
+
 require "../layouts/header.php";
 require "../../config/config.php";
 require "../../config/helper.php";
 
 
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['admin_id'])) {
     header("Location: ../index.php");
     exit();
 }
